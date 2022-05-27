@@ -333,7 +333,7 @@ namespace OpenGLDemoV
 
             return Color.FromArgb(255, newVal, newVal, newVal);
         }
-
+        
         [Obsolete]
         public int drawQuadsStrip(int layerNumber)
         {
@@ -341,6 +341,8 @@ namespace OpenGLDemoV
             GL.Begin(BeginMode.QuadStrip);
 
             for (int x_coord = 0; x_coord < Bin.X - 1; x_coord++)
+            {
+                GL.Begin(BeginMode.QuadStrip);
                 for (int y_coord = 0; y_coord < Bin.Y - 1; y_coord++)
                 {
                     int value;
@@ -352,8 +354,9 @@ namespace OpenGLDemoV
                     GL.Color3(transferFunction(value));
                     GL.Vertex2(x_coord + 1, y_coord);
                 }
+                GL.End();
+            }
 
-            GL.End();
             return layerNumber;
         }
 
@@ -361,7 +364,7 @@ namespace OpenGLDemoV
         public int drawQuads(int layerNumber)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            GL.Begin(BeginMode.QuadStrip);
+            GL.Begin(BeginMode.Quads);
 
             for (int x_coord = 0; x_coord < Bin.X - 1; x_coord++)
                 for (int y_coord = 0; y_coord < Bin.Y - 1; y_coord++)
